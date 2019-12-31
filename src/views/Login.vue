@@ -1,0 +1,455 @@
+/* eslint-disable */
+<template>
+  <div class="wrapper-login">
+    <div class="main-block">
+      <div class="main-logo-wrapper">
+        <img class="main-logo" src="../assets/blackgdut.png" alt />
+      </div>
+      <div class="main-info-wrapper">
+        <h1 class="yulan-system">学生志愿录取填报系统</h1>
+        <div class="login-bar"></div>
+        <div class="info">
+          <div class="info-content">
+            <span class="icons-man"></span>
+            <label for="loginName" v-bind:class="{ iactiveClass: iactiveClass1 }">账号</label>
+            <input
+              v-bind:class="{ inputactiveClass: inputactiveClass1 }"
+              @blur="changeStyle2()"
+              @focus="changeStyle1()"
+              v-model="loginName"
+              id="loginName"
+              type="text"
+              @keydown="keyLogin"
+            />
+          </div>
+        </div>
+        <div class="info">
+          <div class="info-content">
+            <span class="icons-lock"></span>
+            <label for="password" v-bind:class="{ iactiveClass: iactiveClass2 }" id="lock">密码</label>
+            <input
+              v-bind:class="{ inputactiveClass: inputactiveClass2 }"
+              @blur="changeStyle4()"
+              @focus="changeStyle3()"
+              v-model="password"
+              id="password"
+              type="password"
+              @keydown="keyLogin"
+            />
+          </div>
+        </div>
+        <div @click="submit" class="tijiao">登录</div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "Login",
+  data: function() {
+    return {
+      loginName: "",
+      password: "",
+      iactiveClass1: false,
+      iactiveClass2: false,
+      inputactiveClass1: false,
+      inputactiveClass2: false,
+      dialogVisible: false, //显示身份选择
+      cName: "",
+      pos: [],
+      showApp: false
+    };
+  },
+
+  methods: {
+    submit() {
+      this.$axios
+        .post(`/user/login?userId=${this.loginName}&password=${this.password}`)
+        .then(res => {
+          this.$store.commit("userInfo", {
+            userId: this.loginName,
+            role: res.data.data.role
+          });
+          sessionStorage.userId = this.loginName;
+          sessionStorage.role = res.data.data.role;
+          if (res.data.data.role == "学生")
+            this.$router.push("/studentPage/stuInfo");
+          if (res.data.data.role == "管理员")
+            this.$router.push("/adminPage/admission");
+        });
+    },
+    changeStyle1: function() {
+      this.iactiveClass1 = true;
+      this.inputactiveClass1 = true;
+    },
+    changeStyle2: function() {
+      if (this.loginName == "") {
+        this.iactiveClass1 = false;
+        this.inputactiveClass1 = false;
+      }
+    },
+    changeStyle3: function() {
+      this.iactiveClass2 = true;
+      this.inputactiveClass2 = true;
+    },
+    changeStyle4: function() {
+      if (this.password == "") {
+        this.iactiveClass2 = false;
+        this.inputactiveClass2 = false;
+      }
+    },
+    keyLogin(event) {
+      if (event.keyCode == 13) {
+        this.submit();
+      }
+    }
+  }
+};
+</script>
+
+<style scoped>
+* {
+  margin: 0;
+  padding: 0;
+}
+/*背景图*/
+.wrapper-login {
+  min-width: 1000px;
+  min-height: 450px;
+  width: 100%;
+  height: auto;
+  background-image: url("../assets/banner-by-13.jpg");
+  background-size: cover;
+
+  /* background-size: contain; */
+  /* background-repeat: no-repeat; */
+}
+/*右下角的字外包*/
+.down-words {
+  width: 16.9%;
+  position: fixed;
+  bottom: 3.5%;
+  right: 2%;
+}
+/* 右下角字的img */
+.down-words img {
+  width: 100%;
+}
+.main-info-wrapper {
+  position: relative;
+  top: -3rem;
+}
+/*主要填写区*/
+.main-block {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 27rem;
+  height: 28rem;
+  background-color: #ffffff;
+  box-shadow: 4px 2px 20px 1px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
+}
+.main-logo-wrapper {
+  width: 6.5rem;
+  position: relative;
+  margin: 0 auto;
+}
+.main-logo {
+  width: 100%;
+  position: relative;
+  border-radius: 50%;
+  top: -3.25rem;
+}
+
+.yulan-system {
+  text-align: center;
+  font-size: 1.65rem;
+  color: #333333;
+  font-weight: normal;
+}
+.login-bar {
+  width: 19rem;
+  height: 3px;
+  border-radius: 50%;
+  background-color: #82bc00;
+  margin: 20px auto 0;
+}
+
+input {
+  border: none;
+  outline: none;
+}
+/*背景图，作为组件的根标签*/
+.wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-width: 1100px;
+  background-image: url("http://14.29.221.109:10250/upload/images/loginbg.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+/*左上角文字logo*/
+.mainicon {
+  width: 9.7rem;
+  height: 3.15rem;
+  position: absolute;
+  top: 1.6rem;
+  left: 2.15rem;
+  background-image: url("http://14.29.221.109:10250/upload/images/mainicon.png");
+  background-size: 100% 100%;
+}
+/*右边信息块*/
+.info-wrapper {
+  margin-right: 5%;
+  font-size: 1.5rem;
+  /* width: 500px; */
+  /* height: 400px; */
+  /* background-color: pink; */
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+}
+/*玉兰图标logo*/
+.logo {
+  display: inline-block;
+  vertical-align: middle;
+  width: 52px;
+  height: 52px;
+}
+.title {
+  margin: 0 20px;
+  /* line-height: 52px; */
+  vertical-align: middle;
+  font-family: "微软雅黑";
+}
+/*账号密码*/
+.info {
+  margin-top: 2.6rem;
+  text-align: center;
+  font-family: YouYuan;
+  font-size: 1.3rem;
+  color: #a7a7a7;
+}
+#info1 {
+  margin-top: 4rem;
+}
+/*为了加个背景色而加的块*/
+.info-content {
+  text-align: left;
+  position: relative;
+  margin: 0 auto;
+  background-color: rgb(236, 239, 236);
+  width: 327px;
+  height: 38px;
+  border-radius: 19px;
+}
+/*账号密码字*/
+label {
+  z-index: 1;
+  position: absolute;
+  font-style: normal;
+  left: 54px;
+  top: 10px;
+  font-size: 18px;
+  transition: all 0.6s;
+  -webkit-transition: all 0.6s;
+}
+label[id="lock"] {
+  margin-left: 2px;
+  margin-right: 2px;
+}
+/*css的Class*/
+.iactiveClass {
+  left: 16px;
+  top: -26px;
+  font-size: 16px;
+}
+.inputactiveClass {
+  margin-left: 36px !important;
+}
+/*输入框*/
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  transition-delay: 9999s !important;
+  transition: color 9999s ease-out, background-color 9999s ease-out !important;
+}
+.info input {
+  /* position: relative; */
+  margin-left: 78px;
+  font-size: 18px;
+  width: 200px;
+  background-color: transparent;
+  transition: all 1.2s;
+}
+/*账号密码logo*/
+.icons-man,
+.icons-lock {
+  z-index: 1;
+  display: inline-block;
+  position: relative;
+  top: 5.5px;
+  left: 23px;
+}
+.icons-man {
+  width: 25px;
+  height: 27px;
+  background-image: url("http://14.29.221.109:10250/upload/images/man.png");
+}
+.icons-lock {
+  width: 21px;
+  height: 27px;
+  background-image: url("http://14.29.221.109:10250/upload/images/lock.png");
+  left: 24px;
+}
+
+/*登陆按钮部分----------------*/
+.tijiao {
+  user-select: none;
+  margin: 3.6rem auto 0 auto;
+  width: 327px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 20px;
+  text-align: center;
+  background-color: #82bc00;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.dialog .title {
+  text-align: center;
+  font-size: 22px;
+  padding-bottom: 15px;
+}
+.dialog .title span {
+  color: rgb(134, 204, 124);
+}
+.dialog .pos {
+  font-size: 18px;
+  padding-left: 20px;
+}
+.dialog a {
+  position: absolute;
+  right: 10%;
+  text-decoration: none;
+  color: rgb(134, 204, 124);
+}
+.dialog a:hover {
+  color: blue;
+}
+.listyle {
+  line-height: 40px;
+}
+.tri {
+  display: inline-block;
+  background-image: url("http://14.29.221.109:10250/upload/images/tri2.png");
+  width: 50px;
+  height: 50px;
+  background-repeat: no-repeat;
+  /* background-size: cover; */
+  background-size: 113%;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  border-radius: 0px 0px 20px 0px;
+  box-shadow: 1px 1px 5px #888888;
+  cursor: pointer;
+}
+.tri:hover {
+  background-image: url("http://14.29.221.109:10250/upload/images/tri3.png");
+}
+.version {
+  position: relative;
+  top: -43%;
+  left: 105%;
+  width: 370px;
+}
+.item {
+  box-sizing: border-box;
+  width: 168px;
+  height: 168px;
+  border: 1px solid #e4e4e4;
+  text-align: center;
+  padding-top: 30px;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  color: #999;
+  margin: 4px;
+}
+.item p {
+  padding-top: 18px;
+  font-size: 18px;
+}
+#android_version span {
+  display: inline-block;
+  background: url("http://14.29.221.109:10250/upload/images/android.png");
+  width: 60px;
+  height: 60px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+#ios_version span {
+  display: inline-block;
+  background: url("http://14.29.221.109:10250/upload/images/ios.png");
+  width: 60px;
+  height: 60px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.qrcode {
+  width: 166px;
+  height: 166px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: #f8f8f8;
+  display: none;
+}
+.qrcode .qr_code {
+  width: 100px;
+  height: 100px;
+  margin: 15px auto 0px;
+  background: url("http://14.29.221.109:10250/upload/images/app.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+.qrcode p {
+  font-size: 12px;
+  line-height: 3px;
+}
+.item:hover > .qrcode {
+  display: block;
+}
+#ios_version .qr_code {
+  background: url("http://14.29.221.109:10250/upload/images/please.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+</style>
+
+<style>
+.el-dialog {
+  width: 48% !important;
+  /* height: 36%; */
+}
+/*右边确定按钮*/
+.el-button--primary {
+  border-color: rgb(160, 212, 86) !important;
+  background-color: rgb(160, 212, 86) !important;
+}
+.el-popup-parent--hidden {
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+}
+.el-dialog {
+  border-radius: 5px;
+}
+</style>

@@ -1,0 +1,31 @@
+filename, language, JavaScript, Vue, comment, blank, total
+d:\My Documents\Desktop\database\src\App.vue, Vue, 0, 25, 0, 5, 30
+d:\My Documents\Desktop\database\src\components\HelloWorld.vue, Vue, 0, 120, 0, 3, 123
+d:\My Documents\Desktop\database\src\main.js, JavaScript, 41, 0, 0, 5, 46
+d:\My Documents\Desktop\database\src\router\index.js, JavaScript, 105, 0, 4, 5, 114
+d:\My Documents\Desktop\database\src\views\AdminPage.vue, Vue, 0, 146, 0, 8, 154
+d:\My Documents\Desktop\database\src\views\Admission.vue, Vue, 0, 69, 0, 2, 71
+d:\My Documents\Desktop\database\src\views\Admission2.vue, Vue, 0, 68, 0, 2, 70
+d:\My Documents\Desktop\database\src\views\AdmissionPagination.vue, Vue, 0, 43, 0, 3, 46
+d:\My Documents\Desktop\database\src\views\AdmissionPagination2.vue, Vue, 0, 43, 0, 3, 46
+d:\My Documents\Desktop\database\src\views\AdmissionSearch.vue, Vue, 0, 195, 1, 2, 198
+d:\My Documents\Desktop\database\src\views\AdmissionSearch2.vue, Vue, 0, 155, 0, 2, 157
+d:\My Documents\Desktop\database\src\views\AdmissionTable.vue, Vue, 0, 26, 0, 2, 28
+d:\My Documents\Desktop\database\src\views\AdmissionTable2.vue, Vue, 0, 26, 0, 2, 28
+d:\My Documents\Desktop\database\src\views\CollegeCount.vue, Vue, 0, 55, 0, 2, 57
+d:\My Documents\Desktop\database\src\views\Home.vue, Vue, 0, 15, 1, 3, 19
+d:\My Documents\Desktop\database\src\views\Login.vue, Vue, 0, 421, 26, 9, 456
+d:\My Documents\Desktop\database\src\views\Plan.vue, Vue, 0, 65, 0, 2, 67
+d:\My Documents\Desktop\database\src\views\PlanPagination.vue, Vue, 0, 43, 0, 3, 46
+d:\My Documents\Desktop\database\src\views\PlanSearch.vue, Vue, 0, 104, 9, 2, 115
+d:\My Documents\Desktop\database\src\views\PlanTable.vue, Vue, 0, 21, 0, 2, 23
+d:\My Documents\Desktop\database\src\views\Refuse.vue, Vue, 0, 52, 0, 2, 54
+d:\My Documents\Desktop\database\src\views\Result.vue, Vue, 0, 28, 4, 2, 34
+d:\My Documents\Desktop\database\src\views\School.vue, Vue, 0, 87, 0, 7, 94
+d:\My Documents\Desktop\database\src\views\SchoolCount.vue, Vue, 0, 52, 0, 2, 54
+d:\My Documents\Desktop\database\src\views\SpecialityCount.vue, Vue, 0, 56, 0, 2, 58
+d:\My Documents\Desktop\database\src\views\StuInfo.vue, Vue, 0, 542, 32, 18, 592
+d:\My Documents\Desktop\database\src\views\StudentPage.vue, Vue, 0, 132, 0, 9, 141
+d:\My Documents\Desktop\database\src\views\TopOne.vue, Vue, 0, 87, 0, 7, 94
+d:\My Documents\Desktop\database\src\views\TopStu.vue, Vue, 0, 56, 0, 2, 58
+Total, -, 146, 2732, 77, 118, 3073
