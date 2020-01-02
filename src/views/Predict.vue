@@ -168,54 +168,50 @@ export default {
         this.rank = res.data.data.rank;
       });
 
-    this.$axios
-      .post(`/user/findSpeciality?schoolName=广东供液大学`)
-      .then(res => {
-        if (res.data.data) {
-          res.data.data.forEach(val => {
-            this.options3.push({
-              value: val,
-              label: val
-            });
+    this.$axios.get(`/user/getMajor`).then(res => {
+      if (res.data.data) {
+        res.data.data.forEach(val => {
+          this.options3.push({
+            value: val,
+            label: val
           });
-        }
-      });
+        });
+      }
+    });
   },
   watch: {
     formLabelAlign: {
       deep: true,
       handler() {
-        this.$axios
-          .post(`/user/findSpeciality?schoolName=广东供液大学`)
-          .then(res => {
-            let arr = res.data.data;
-            this.options3 = [];
-            let index = [];
-            let temp = [
-              this.formLabelAlign.s1zy1,
-              this.formLabelAlign.s1zy2,
-              this.formLabelAlign.s1zy3,
-              this.formLabelAlign.s1zy4,
-              this.formLabelAlign.s1zy5,
-              this.formLabelAlign.s1zy6
-            ];
-            for (let [idx, val] of arr.entries()) {
-              temp.forEach(zy => {
-                if (zy == val) {
-                  index.push(idx);
-                }
-              });
-            }
-            for (let i = index.length - 1; i >= 0; i--) {
-              arr.splice(index[i], 1);
-            }
-            arr.forEach(val => {
-              this.options3.push({
-                value: val,
-                label: val
-              });
+        this.$axios.get(`/user/getMajor`).then(res => {
+          let arr = res.data.data;
+          this.options3 = [];
+          let index = [];
+          let temp = [
+            this.formLabelAlign.s1zy1,
+            this.formLabelAlign.s1zy2,
+            this.formLabelAlign.s1zy3,
+            this.formLabelAlign.s1zy4,
+            this.formLabelAlign.s1zy5,
+            this.formLabelAlign.s1zy6
+          ];
+          for (let [idx, val] of arr.entries()) {
+            temp.forEach(zy => {
+              if (zy == val) {
+                index.push(idx);
+              }
+            });
+          }
+          for (let i = index.length - 1; i >= 0; i--) {
+            arr.splice(index[i], 1);
+          }
+          arr.forEach(val => {
+            this.options3.push({
+              value: val,
+              label: val
             });
           });
+        });
       }
     }
   }
