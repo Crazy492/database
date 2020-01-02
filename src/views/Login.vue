@@ -64,20 +64,38 @@ export default {
 
   methods: {
     submit() {
-      this.$axios
-        .post(`/user/login?userId=${this.loginName}&password=${this.password}`)
-        .then(res => {
-          this.$store.commit("userInfo", {
-            userId: this.loginName,
-            role: res.data.data.role
+      if (this.loginName[0] != 2) {
+        this.$axios
+          .post(
+            `/user/login?userId=${this.loginName}&password=${this.password}`
+          )
+          .then(res => {
+            this.$store.commit("userInfo", {
+              userId: this.loginName,
+              role: res.data.data.role
+            });
+            sessionStorage.userId = this.loginName;
+            sessionStorage.role = res.data.data.role;
+            if (res.data.data.role == "学生")
+              this.$router.push("/studentPage/stuInfo");
+            if (res.data.data.role == "管理员")
+              this.$router.push("/adminPage/admission");
           });
-          sessionStorage.userId = this.loginName;
-          sessionStorage.role = res.data.data.role;
-          if (res.data.data.role == "学生")
-            this.$router.push("/studentPage/stuInfo");
-          if (res.data.data.role == "管理员")
-            this.$router.push("/adminPage/admission");
-        });
+      } else {
+        this.$axios
+          .post(
+            `/user/login?userId=${this.loginName}&password=${this.password}`
+          )
+          .then(res => {
+            this.$store.commit("userInfo", {
+              userId: this.loginName,
+              role: res.data.data.role
+            });
+            sessionStorage.userId = this.loginName;
+            sessionStorage.role = res.data.data.role;
+            this.$router.push("/predict");
+          });
+      }
     },
     changeStyle1: function() {
       this.iactiveClass1 = true;

@@ -15,6 +15,7 @@ import CollegeCount from "../views/CollegeCount.vue";
 import TopStu from "../views/TopStu.vue";
 import TopOne from "../views/TopOne.vue";
 import School from "../views/School.vue";
+import Predict from "../views/Predict.vue";
 
 Vue.use(VueRouter);
 
@@ -23,6 +24,11 @@ const routes = [
     path: "/",
     name: "Login",
     component: Login
+  },
+  {
+    path: "/Predict",
+    name: "Predict",
+    component: Predict
   },
   {
     path: "/adminPage",

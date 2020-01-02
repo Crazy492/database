@@ -60,7 +60,6 @@ export default {
   },
   methods: {
     toStuInfo() {
-      console.log(1);
       this.$router.push("/stuInfo");
     },
     exit() {
