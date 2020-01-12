@@ -1,5 +1,11 @@
 <template>
   <div class="refuse">
+    <el-button
+      type="primary"
+      @click="exp"
+      style="margin-bottom:20px;float:right"
+      >导出</el-button
+    >
     <el-table :data="tableData" stripe>
       <el-table-column prop="studentName" label="姓名"></el-table-column>
       <el-table-column prop="studentCity" label="城市"></el-table-column>
@@ -42,6 +48,9 @@ export default {
           this.total = res.data.data.total;
         }
       });
+    },
+    exp() {
+      location.href = "http://39.108.184.56:8200/admin/getRefuseToExcel";
     }
   }
 };

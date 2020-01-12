@@ -2,7 +2,12 @@
   <div class="admission_search">
     <el-form :inline="true" :model="search" class="demo-form-inline">
       <el-form-item label="学校">
-        <el-select v-model="search.school" placeholder="学校" size="small" clearable>
+        <el-select
+          v-model="search.school"
+          placeholder="学校"
+          size="small"
+          clearable
+        >
           <el-option
             v-for="item in options1"
             :key="item.value"
@@ -12,7 +17,12 @@
         </el-select>
       </el-form-item>
       <el-form-item label="学院">
-        <el-select v-model="search.college" placeholder="学院" size="small" clearable>
+        <el-select
+          v-model="search.college"
+          placeholder="学院"
+          size="small"
+          clearable
+        >
           <el-option
             v-for="item in options3"
             :key="item.value"
@@ -22,7 +32,12 @@
         </el-select>
       </el-form-item>
       <el-form-item label="专业">
-        <el-select v-model="search.speciality" placeholder="专业" size="small" clearable>
+        <el-select
+          v-model="search.speciality"
+          placeholder="专业"
+          size="small"
+          clearable
+        >
           <el-option
             v-for="item in options2"
             :key="item.value"
@@ -32,7 +47,12 @@
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="onSubmit" size="small">查询</el-button>
+        <el-button type="primary" @click="onSubmit" size="small"
+          >查询</el-button
+        >
+      </el-form-item>
+      <el-form-item>
+        <el-button type="primary" @click="exp" size="small">导出</el-button>
       </el-form-item>
       <!-- <el-form-item>
         <el-button type="primary" @click="first" size="small">初次录取</el-button>
@@ -82,6 +102,18 @@ export default {
   methods: {
     onSubmit() {
       this.$emit("search", this.search);
+    },
+    exp() {
+      let { college, school, speciality } = this.search;
+      location.href = `http://39.108.184.56:8200/admin/exportExcel?school=${school}&college=${college}&speciality=${speciality}`;
+      // window.open('http://http://39.108.184.56:8200/admin/getAdmissionToExcel',name,features,replace)
+      // this.$axios({
+      //   url: `/admin/exportExcel`,
+      //   method: "GET",
+      //   data: this.search
+      // }).then(res => {
+      //   window.open(res.data);
+      // });
     }
   },
   created() {
@@ -153,5 +185,4 @@ export default {
 };
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>
